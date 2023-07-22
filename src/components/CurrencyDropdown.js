@@ -7,10 +7,10 @@ const CurrencyDropdown = ({ setSelectedCurrency }) => {
   };
 
   return (
-    <div>
-      <label htmlFor="currency">Select currency:</label>
-      <select id="currency" onChange={handleCurrencyChange}>
-        <option value="$">$ Dollar</option>
+    <div className="dropdown">
+      {/* <label htmlFor="currency">Currency:</label> */}
+      <select className="btn-green" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="currency" onChange={handleCurrencyChange}>
+        <option value="$">Currency ($ Dollar)</option>
         <option value="£">£ Pound</option>
         <option value="€">€ Euro</option>
         <option value="₹">₹ Rupee</option>
