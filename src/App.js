@@ -25,10 +25,10 @@ const App = () => {
                         <Budget selectedCurrency={selectedCurrency}/>
                     </div>
                     <div className='col-sm'>
-                        <RemainingBudget />
+                        <RemainingBudget selectedCurrency={selectedCurrency}/>
                     </div>
                     <div className='col-sm'>
-                        <ExpenseTotal />
+                        <ExpenseTotal selectedCurrency={selectedCurrency}/>
                     </div>
                     <div className='col-sm'>
                         <CurrencyDropdown setSelectedCurrency={setSelectedCurrency}/>
