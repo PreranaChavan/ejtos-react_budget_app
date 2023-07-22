@@ -1,38 +1,69 @@
+// ExpenseItem.js
 import React, { useContext } from 'react';
 import { TiDelete } from 'react-icons/ti';
 import { AppContext } from '../context/AppContext';
 
 const ExpenseItem = (props) => {
-    const { dispatch } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
+  const { name, cost, selectedCurrency } = props;
 
-    const handleDeleteExpense = () => {
-        dispatch({
-            type: 'DELETE_EXPENSE',
-            payload: props.id,
-        });
+  const handleDeleteExpense = () => {
+    dispatch({
+      type: 'DELETE_EXPENSE',
+      payload: props.id,
+    });
+  };
+
+  const increaseAllocation = (name) => {
+    const expense = {
+      name: name,
+      cost: 10,
     };
 
-    const increaseAllocation = (name) => {
-        const expense = {
-            name: name,
-            cost: 10,
-        };
+    dispatch({
+      type: 'ADD_EXPENSE',
+      payload: expense,
+    });
+  };
 
-        dispatch({
-            type: 'ADD_EXPENSE',
-            payload: expense
-        });
+  const decreaseAllocation = (name) => {
+    const expense = {
+      name: name,
+      cost: -10, // Decrease by 10
+    };
 
-    }
+    dispatch({
+      type: 'ADD_EXPENSE',
+      payload: expense,
+    });
+  };
 
-    return (
-        <tr>
-        <td>{props.name}</td>
-        <td>£{props.cost}</td>
-        <td><button onClick={event=> increaseAllocation(props.name)}>+</button></td>
-        <td><TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete></td>
-        </tr>
-    );
+  // Mapping of currency symbols
+  const currencySymbols = {
+    '$': '$',
+    '£': '£',
+    '€': '€',
+    '₹': '₹',
+  };
+
+  return (
+    <tr>
+      <td>{name}</td>
+      <td>
+        {currencySymbols[selectedCurrency]} {/* Display the appropriate currency symbol */}
+        {cost}
+      </td>
+      <td>
+        <button onClick={() => increaseAllocation(name)}> + </button>
+      </td>
+      <td>
+        <button onClick={() => decreaseAllocation(name)}> - </button> {/* Move the decrease button here */}
+      </td>
+      <td>
+        <TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete> {/* Move the Delete button here */}
+      </td>
+    </tr>
+  );
 };
 
 export default ExpenseItem;
